@@ -4,11 +4,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace ProductManagement
 {
     public class ProductRepository : IRepository<Product>
     {
+        Regex regex = new Regex(@"[0-9?=,.:;-\\s]+");
         string cs;
         SqlConnection conn;
         public ProductRepository()
@@ -19,6 +21,8 @@ namespace ProductManagement
         {
             if (entity.Name.Trim().Equals("") || entity.Name.Length > 50)
                 throw new ArgumentException("The name must have [1,50] characters");
+            if (match.Success)
+                    throw new ArgumentException("The name must not have special characters"); 
             //if (entity.CreateDate > DateTime.UtcNow)
             //    throw new ArgumentException("The date must not exceed today");
             //if (entity.Price < 0)
