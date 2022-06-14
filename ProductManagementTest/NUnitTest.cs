@@ -86,5 +86,21 @@ namespace ProductManagementTest
             var ex = Assert.Throws<ArgumentException>(() => productRepo.Create(product));
             Assert.That(ex.Message, Is.EqualTo("The name must have [1,50] characters"));
         }
+        [Test]
+        public void CreateProductTest_NameRegexException()
+        {
+            //Assign
+            //database id: int identity
+            product = new Product();
+            product.Id = 14;
+            product.Name = "01823hsevenup,.;324-";
+            product.CreateDate = new DateTime(2022, 6, 13);
+            product.Price = 15000;
+            product.Status = 1;
+            product.CategoryId = 1;
+
+            var ex = Assert.Throws<ArgumentException>(() => productRepo.Create(product));
+            Assert.That(ex.Message, Is.EqualTo("The name must not have special characters"));
+        }
     }
 }
