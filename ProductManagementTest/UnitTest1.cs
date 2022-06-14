@@ -1,6 +1,6 @@
 using NUnit.Framework;
+using ProductManagement;
 using System;
-using ConsoleApp6;
 namespace TestProject5
 {
     public class Tests
@@ -16,11 +16,11 @@ namespace TestProject5
                 dt = DateTime.Parse(s);
             Product pro = new Product()
             {
-                Name = "`~!@#$%^&*()_+=0123456789<>",
+                    Name = "`~!@#$%^&*()_+=0123456789<>",
                     Price = 1000,
-                    CreatedDate = dt,
+                    CreateDate = dt,
                     Status = 1,
-                    CategoryId = 0,
+                    CategoryId = 1,
 
                 };
             if (pro.Name.IndexOfAny(invalidCharacters) >= 0)
